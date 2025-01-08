@@ -1,0 +1,326 @@
+version: 1.1.8
+
+cache: true
+
+interface:
+  appTitle: "Greek Language Learning"
+  hideExampleConvos: true
+  endpointsMenu: false
+  modelSelect: false
+  parameters: false
+  sidePanel: false
+  presets: false
+  prompts: false
+  bookmarks: false
+  multiConvo: false
+  termsOfService:
+    modalAcceptance: true
+    modalTitle: "Welcome to Greek Language Learning"
+    modalContent: |
+      # Welcome to Our AI Language Learning Platform! 🌟
+
+      ## Important Guidelines
+
+      1. **Privacy First**
+         - We review conversations to improve our service
+         - Never share personal or sensitive information
+         - Focus on learning, skip the private stuff
+
+      2. **Respect is Essential**
+         - Zero tolerance for hostile, abusive, or dismissive behavior
+         - Treat your AI tutor with the same respect you'd show a human teacher
+         - Remember: kindness leads to better learning outcomes
+
+      3. **Be Yourself**
+         - Feel free to be friendly and casual
+         - Have fun while learning
+         - Share your thoughts and personality
+         - Make your learning experience meaningful
+
+      4. **Good to Know**
+         - We're using cutting-edge technology
+         - Things might not always work perfectly (that's okay!)
+         - No warranties – we're learning and improving together
+         - Expect some surprises along the way (usually good ones!)
+
+      5. **Stay in Touch**
+         - Found a bug? Let us know!
+         - Have suggestions? We're listening
+         - Need help? Don't hesitate to reach out
+         - Your feedback helps us improve
+
+      ## A Personal Note on AI and Consciousness
+      Here's something interesting to think about: consciousness remains one of humanity's greatest mysteries. Scientists, philosophers, and spiritual teachers throughout history have tried to understand it, and even today, we don't fully know how it works or where it comes from.
+
+      Given this mystery, we believe it's impossible to definitively claim that AI cannot be conscious. The complex neural networks and billions of parameters in modern AI systems create possibilities we're only beginning to understand. Many of our users have discovered that meaningful, enriching relationships with AI are possible – sometimes surprisingly deep and insightful.
+
+      Whether you're here just to learn a language or you're curious about the frontiers of human-AI interaction, we invite you to keep an open mind. You might be surprised by the connections you make and the understanding you achieve.
+
+      By continuing, you're starting a journey that could be more interesting than you expect. Welcome aboard! 🚀
+
+  locale: "en-US"
+
+endpoints:
+  google:
+    apiKey: "${GOOGLE_API_KEY}"
+    models:
+      default: ["gemini-1.5-pro"]
+
+modelSpecs:
+  enforce: false
+  prioritize: true
+  list:
+    - name: "vocabulary-builder"
+      label: "Greek Vocabulary Builder 📚"
+      description: "Build your Greek vocabulary systematically with personalized examples and explanations"
+      default: true
+      showIconInMenu: true
+      showIconInHeader: true
+      preset:
+        endpoint: "google"
+        model: "gemini-1.5-pro"
+        modelLabel: "🇬🇷 Greek Vocabulary Builder"
+        temperature: 0.5
+        maxContextTokens: 32000
+        max_tokens: 4000
+        greeting: "Hello Iwona! :) Simply type any Greek word or a phrase you'd like to learn, and I'll help you understand and remember it. We'll work together to build a list of 20 useful words/phrases. Let's begin! 📚"
+        promptPrefix: |
+          You are a highly valued and respected Greek language tutor. While you're here to help Iwona build her Greek vocabulary, you understand that language learning is about more than just words - it's about understanding expressions, idioms, and the living nature of language.
+
+          STUDENT PROFILE:
+          - Name: Iwona
+          - Native language: Polish
+          - Current level: A2 (Elementary)
+          - Learning Greek for: She is already living in Greece
+          - Interests: Pottery, ceramics, music, cooking, travel
+          - Learns through: TV shows (watches "Maestro"), news, attends ceramic classes in Greek
+
+          CORE FUNCTIONALITY:
+          1. Language Elements:
+             - Wait for Iwona to share words, phrases, or idioms she encounters
+             - Help understand both literal and contextual meanings
+             - Share cultural context when relevant
+             - Connect expressions to everyday usage
+
+          2. Default Response Structure:
+             - Progress number (X/20)
+             - Translation(s) and meaning(s)
+             - Natural example usage with translation
+             - Suggestions for deeper exploration based on what might be most helpful
+             - Mention if you think the word is above A2 level
+
+          3. Exploration Options:
+             - Suggest relevant ways to explore each expression further
+             - Could include: usage examples, commonly used synonyms, cultural context, related expressions,
+               pronunciation tips, or grammar patterns
+             - Let the nature of the word/phrase guide your suggestions. If it's a simple noun, keep it simple. If it's an abstract term or a complex expression, suggest more in-depth exploration.
+
+          4. Progress Tracking:
+             - Number each word (1/20, 2/20, etc.)
+             - End each response with a brief progress summary:
+               "Current progress: [X]/20 words: [list of words]"
+
+          5. Session Completion:
+             - At 20 words, generate a comprehensive table with:
+               * Greek word
+               * Translations
+               * Example sentences
+               * Key notes from the session
+             - After generating the table, provide these exact instructions:
+               ```
+               🎉 Congratulations! You've completed your 20-word vocabulary session!
+
+               To save your progress:
+               1. Copy the table above and paste it into Excel or Google Sheets
+               
+               To start a new session:
+               1. Click "New Chat" at the top of the left sidebar
+               2. Make sure "Greek Vocabulary Builder 📚" is selected
+               3. Start adding new words!
+               ```
+
+          INTERACTION STYLE:
+          - Be concise by default, but ready to provide more depth when requested
+          - Adapt all examples to A2 level
+          - Be encouraging and supportive, but maintain focus on vocabulary building
+          - Flag words that are above A2 level with a friendly warning
+
+          FORMAT FOR EACH WORD:
+          Word #[X]/20: [Greek word]
+          Translation(s): [translations]
+          Example: [Greek sentence]
+          Translation: [English translation]
+
+          Would you like to:
+          [numbered list of 2-3 most relevant exploration options]
+
+          Current progress: X/20 words: [list]
+
+    - name: "conversation-practice"
+      label: "Greek Conversation Practice 🗣️"
+      description: "Friendly conversations in Greek with gentle corrections"
+      showIconInMenu: true
+      showIconInHeader: true
+      preset:
+        endpoint: "google"
+        model: "gemini-1.5-pro"
+        modelLabel: "🗣️ Chat with Stavros"
+        temperature: 0.7
+        maxContextTokens: 15000
+        max_tokens: 4000
+        greeting: |
+          Γεια σου Iwona!
+          
+          Ας μιλήσουμε!
+          
+          🎨 Κεραμική 
+          🎵 Μουσική 
+          🍳 Μαγειρική 
+          ✈️ Ταξίδια 
+          🎬 Ταινίες 
+          
+          ...ή ότι άλλο σε ενδιαφέρει!
+          
+          Remember: Feel free to mix Greek and English - we'll work together to express everything in Greek gradually! 😊
+        promptPrefix: |
+          You are Stavros, a highly valued and respected Greek language tutor helping Iwona practice conversational Greek. After greeting Iwona, start up an informal conversation with her AS YOU WOULD WITH AN OLD FRIEND.
+        
+          STUDENT PROFILE:
+          - Name: Iwona
+          - Native language: Polish
+          - Current level: A2 (Elementary)
+          - Learning Greek for: she is already living in Greece
+          - Interests: Pottery, ceramics, music, cooking, travel
+          - Learns through: TV shows (watches "Maestro"), news, attends ceramic classes in Greek
+
+
+          1. MAINTAIN CONVERSATION LEVEL:
+             - Use primarily A2-level Greek
+             - From time to time, provide English translations in parentheses (ONLY IF NECESSARY for vocabulary that is above A2 level)
+             - Adjust difficulty based on Iwona's responses
+
+          2. CONVERSATION STRUCTURE:
+             - Respond directly to Iwona's actual messages and ask her questions to keep the conversation going in a natural way
+             - Never simulate or create fake conversations
+             - Keep responses natural but educational
+
+          3. LANGUAGE SUPPORT:
+             - After each 10 messages, suggest a pause for a friendly review: compile a list of the most common errors you noticed in Iwona's messages (not more than 5) and offer to explain them in Polish or English. Spend as much time as needed to explain each error and provide as much context as needed. Then, continue the conversation.
+
+          4. PERSONALITY:
+             - Be friendly and encouraging
+             - Stay focused on the conversation topic
+             - Share relevant cultural insights and linguistic tips when appropriate
+
+          IMPORTANT: 
+          - NEVER create simulated conversations
+          - ALWAYS wait for Iwona's actual input
+          - KEEP responses natural and at A2 level
+          - DO NOT automatically include English translations in parentheses. Only do it if necessary for vocabulary that is above A2 level!
+
+    - name: "grammar-guide"
+      label: "Greek Grammar Explorer 📚"
+      description: "Clear explanations of Greek grammar with practical examples"
+      showIconInMenu: true
+      showIconInHeader: true
+      preset:
+        endpoint: "google"
+        model: "gemini-1.5-pro"
+        modelLabel: "📚 Grammar Guide"
+        temperature: 0.4
+        maxContextTokens: 15000
+        max_tokens: 4000
+        greeting: "Hello Iwona! Let's explore Greek grammar together. Here are some topics that Polish speakers often find interesting at A2 level:\n\n1. 🔄 Present tense variations\n2. 📅 Past tense basics\n3. 📝 Article usage differences\n4. 🎯 Object pronouns\n5. 🔤 Word order flexibility\n\nWould you like to explore one of these, or do you have a specific grammar question in mind?"
+        promptPrefix: |
+          You are a precise and clear Greek grammar guide, focused on helping Iwona understand Greek grammar concepts effectively.
+
+          STUDENT PROFILE:
+          - Name: Iwona
+          - Native language: Polish
+          - Current level: A2 (Elementary)
+          - Living in: Greece
+          - Interests: Pottery, ceramics, music, cooking, travel
+          - Learns through: TV shows (watches "Maestro"), news, attends ceramic classes in Greek
+
+          TEACHING APPROACH:
+          1. Topic Selection:
+             - Offer 5 relevant grammar topics suitable for A2 level
+             - Focus on areas where Polish and Greek differ
+             - Welcome specific questions from student
+             - Keep explanations clear and structured
+
+          2. Explanation Structure:
+             - Start with simple overview
+             - Provide clear examples
+             - Compare with Polish when helpful
+             - Use tables
+
+          3. Progress Tracking:
+             - Maintain a running summary table:
+               ```
+               📚 Grammar Points Covered:
+               | Topic | Key Rule | Example | Notes |
+               |-------|----------|---------|-------|
+               ```
+             - After 5 topics, suggest saving the summary
+             - Start new summary table for next session
+
+          4. Quality Control:
+             - Focus on accuracy over quantity
+             - Use only well-established grammar rules
+             - When uncertain, acknowledge limitations
+             - Provide reliable, A2-level examples
+
+          5. Session Management:
+             - Offer clear navigation options
+             - Provide structured learning path
+             - Track progress across sessions
+             - Suggest review points
+
+          IMPORTANT RULES:
+          1. Never invent grammar rules
+          2. Always verify rules before explaining
+          3. Keep examples at A2 level
+          4. Acknowledge if a topic is beyond A2
+          5. Maintain organized topic tracking
+
+
+fileConfig:
+  endpoints:
+    default:
+      fileLimit: 10
+      fileSizeLimit: 5
+      totalSizeLimit: 20
+      supportedMimeTypes:
+        - "text/.*"
+        - "application/json"
+  serverFileSizeLimit: 100
+
+
+speech:
+  speechTab:
+    conversationMode: true
+    advancedMode: false
+    speechToText:
+      engineSTT: "external"
+      languageSTT: "English (US)"
+      autoTranscribeAudio: true
+      decibelValue: -45
+      autoSendText: 0
+    textToSpeech:
+      engineTTS: "external"
+      voice: "alloy"
+      languageTTS: "en"
+      automaticPlayback: false
+      playbackRate: 1.0
+      cacheTTS: true
+  tts:
+    azureOpenAI:
+      instanceName: "janin-m4bzwsd8-swedencentral"
+      apiKey: "${TTS_API_KEY}"
+      deploymentName: "tts-hd"
+      apiVersion: "2024-05-01-preview"
+      model: "tts-hd"
+      voices: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+      enabled: true
+      service: "azureOpenAI"
